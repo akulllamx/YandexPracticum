@@ -11,10 +11,28 @@ class Board:
     def make_move(self, row, col, player):
         self.board[row][col] = player
 
-    def display(self):
-        for row in self.board:
-            print('|'.join(row))
-            print('-' * 5)
+    # def display(self):
+    #     for row in self.board:
+    #         print('|'.join(row))
+    #         print('-' * 5)
+
+    def is_board_full(self):
+        for i in range(self.field_size):
+            for j in range(self.field_size):
+                if self.board[i][j] == ' ':
+                    return False
+        return True
+
+    def check_win(self, player):
+        for i in range(self.field_size):
+            if (all([self.board[i][j] == player for j in range(self.field_size)]) or
+                    all([self.board[j][i] == player for j in range(self.field_size)])):
+                return True
+        if (all([self.board[i][i] == player for i in range(self.field_size)]) or
+                all([self.board[i][self.field_size - 1 - i] == player for i in range(self.field_size)])):
+            return True
+
+        return False
 
     # Переопределяем метод __str__.
     def __str__(self):

@@ -1,5 +1,4 @@
-a = int(input('Введите первое число: '))
-b = int(input('Введите второе число: '))
+# check.py
 
-result = a + b
-print('Результат сложения:', result)
+for _ in range(10**6):
+    input()
