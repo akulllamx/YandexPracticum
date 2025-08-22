@@ -1,26 +1,33 @@
-wins = ['алгоритмы', 'будут', 'главным', 'доводом', 'профессионального', 'разработчика']
+class Node:
+    def __init__(self, value, next_item=None):
+        self.value = value
+        self.next_item = next_item
+
+def solution(node, idx):
+    lst_node = []
+
+    while node is not None:
+        lst_node.append(node)
+        node = node.next_item
+
+    lst_node.pop(idx)
+
+    for i in range(len(lst_node) - 1):
+        lst_node[i].next_item = lst_node[i + 1]
+
+    if lst_node:
+        lst_node[-1].next_item = None
+        return lst_node[0]
+    else:
+        return None
 
 
-def find_element(sorted_numbers, element):
-    """Находит индекс element в отсортированном списке sorted_numbers."""
-    left = 0
-    right = len(sorted_numbers)
+# Тестирующая функция для проверки решения.
+# Не изменяйте её, она не требует вашего внимания.
 
-    while left < right:
-        mid = (left + right) // 2
-        result = sorted_numbers[mid]
-        if result == element:
-            return mid
-        elif result > element:
-            right = mid
-        elif result < element:
-            left = mid + 1
-    return None
+node3 = Node("Задача 4: Обследовать грунт в радиусе 3 м", None)
+node2 = Node("Задача 3: Измерить температуру атмосферы", node3)
+node1 = Node("Задача 2: Пробурить скважину глубиной 0.5 м", node2)
+node0 = Node("Задача 1: Фотосъёмка 360°", node1)
 
-
-# Проверим, что ваш код успешно находит все значения,
-# которые есть в списке wins: в качестве искомого элемента
-# поочерёдно передадим в функцию все значения из списка.
-
-print(find_element(wins, 'доводом'))
-
+new_head = solution(node0, 1)
